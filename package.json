@@ -1,0 +1,52 @@
+{
+  "name": "feedly",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "web:serve": "vue-cli-service serve",
+    "web:build": "vue-cli-service build",
+    "web:lint": "vue-cli-service lint",
+    "server:start": "node ./server.js"
+  },
+  "dependencies": {
+    "core-js": "^2.6.5",
+    "dotenv": "^8.1.0",
+    "koa": "^2.7.0",
+    "koa-bodyparser": "^4.2.1",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0",
+    "koa2-history-api-fallback": "^0.1.0",
+    "register-service-worker": "^1.6.2",
+    "vue": "^2.6.10",
+    "vue-class-component": "^7.0.2",
+    "vue-property-decorator": "^8.1.0",
+    "vue-router": "^3.0.3",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.10.0",
+    "@vue/cli-plugin-pwa": "^3.10.0",
+    "@vue/cli-plugin-typescript": "^3.10.0",
+    "@vue/cli-service": "^3.10.0",
+    "less": "~3.9.0",
+    "less-loader": "^4.1.0",
+    "lint-staged": "^8.1.5",
+    "typescript": "^3.4.3",
+    "vue-template-compiler": "^2.6.10"
+  },
+  "gitHooks": {
+    "pre-commit": "lint-staged"
+  },
+  "lint-staged": {
+    "*.ts": [
+      "vue-cli-service lint",
+      "git add"
+    ],
+    "*.vue": [
+      "vue-cli-service lint",
+      "git add"
+    ]
+  }
+}
