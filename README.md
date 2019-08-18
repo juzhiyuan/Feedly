@@ -10,5 +10,5 @@ $ yarn
 # 2. Move file sample.env to .env & fill out the .env content
 
 # 3. Bulild Web files & run API server
-$ yarn build && yarn start
+$ yarn web:build && yarn server:start
 ```
