@@ -77,10 +77,10 @@ const fetchVideo = async (url) => {
   }
 }
 
-const processCategoryDetail = (id, html) => {
+const processCategoryDetail = async (id, html) => {
   html = '<div id="list">' + html + '</div>'
   const $ = cheerio.load(html)
-  const videos = []
+  let videos = []
 
   $('#list').find('.swiper-type1_item').each(async function (index, element) {
     // HTML 中含有重复的 class 名称，在此判断是否遍历内层数据。
@@ -115,22 +115,30 @@ const processCategoryDetail = (id, html) => {
     const playURL = await fetchVideo(originURL)
 
     const video = {
-      resourceId: id,
-      resourceOriginURL: originURL,
-      resourceTitle: title,
-      resourceDescription: intro,
-      resourceAuthor: author,
-      resourceCover: coverSrc,
-      resourcePlayURL: playURL,
+      id,
+      originURL,
+      title,
+      intro,
+      author,
+      coverSrc,
+      playURL,
     }
 
-    videos.push(video)
+    videos = videos.concat(video)
   })
 
-  categoryData.push({
-    id,
-    data: videos
-  })
+  // each 为异步操作
+  await sleep(2000)
+
+  const categoryIndex = categoryData.findIndex(category => category.id === id)
+  if (categoryIndex === -1) {
+    categoryData.push({
+      id,
+      data: videos
+    })
+  } else {
+    categoryData[categoryIndex].data = categoryData[categoryIndex].data.concat(videos)
+  }
 }
 
 const fetchCategory = async id => {
